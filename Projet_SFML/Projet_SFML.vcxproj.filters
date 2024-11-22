@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers sources\Assets">
+      <UniqueIdentifier>{16583351-6dde-4a75-a89c-5760d679956f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Assets\Image">
+      <UniqueIdentifier>{f9ce01a0-9eac-4d34-b8a7-642956024164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Assets\Audio">
+      <UniqueIdentifier>{f1f0f344-accb-4bf7-a6ad-19433a487096}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Assets\Font">
+      <UniqueIdentifier>{3e30316b-c031-47cc-842d-b3b9b366c441}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
