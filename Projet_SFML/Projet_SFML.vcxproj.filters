@@ -31,4 +31,25 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\..\..\..\Downloads\sound_click.wav">
+      <Filter>Fichiers sources\Assets\Audio</Filter>
+    </Media>
+    <Media Include="..\..\..\..\Downloads\UI-Click_Sound.wav">
+      <Filter>Fichiers sources\Assets\Audio</Filter>
+    </Media>
+    <Media Include="Assets\Audio\572__aarondbaron__ambienceforyou.wav">
+      <Filter>Fichiers sources\Assets\Audio</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\..\..\..\Downloads\Super_Mario_64_font.ttf">
+      <Filter>Fichiers sources\Assets\Font</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Downloads\Young_Sun_Tzu_cosplay_Mario.jpg">
+      <Filter>Fichiers sources\Assets\Image</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
