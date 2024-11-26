@@ -78,7 +78,7 @@ int main()
                     break;
                 case 1:
                     // Logique pour charger une partie
-                    cout << "Charger une Partie sélectionnée" << endl;
+                    cout << "Charger une Partie sélectionnée." << endl;
                     // Ici, tu peux ajouter la logique pour charger une partie sauvegardée
                     break;
                 case 2:
