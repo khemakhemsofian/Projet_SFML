@@ -2,76 +2,110 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/System.hpp>
+#include <vector>
 #include <iostream>
+#include "Menu.h"
+
+
 using namespace sf;
+using namespace std;
+
 
 
 int main()
 {
     // Création de la fenêtre SFML
-    RenderWindow window(sf::VideoMode(800, 600), "Mario Tzu Party");
-    window.setFramerateLimit(60);
+    RenderWindow _window(sf::VideoMode(800, 600), "Mario Tzu Party");
+    _window.setFramerateLimit(60);
 
     // Chargement de l'image de fond
-    Texture backgroundTexture;
-    Font MenuFont;
-    SoundBuffer CLickSoundBuffer;
-    Music musicDeFond;
+    Texture _backgroundTexture;
+    SoundBuffer _CLickSoundBuffer;
+    Music _musicDeFond;
    
-    if (!backgroundTexture.loadFromFile("Assets/Image/Young_Sun_Tzu_cosplay_Mario.jpg")) {
+    if (!_backgroundTexture.loadFromFile("Assets/Image/Young_Sun_Tzu_cosplay_Mario.jpg")) {
         return -1; // Vérification si l'image a été correctement chargée
     }
-    if (!MenuFont.loadFromFile("Assets/Font/Super_Mario_64_font.ttf")) {
+    if (!_CLickSoundBuffer.loadFromFile("Assets/Audio/UI-Click_Sound.wav")) {
         return -1; // Vérification si l'image a été correctement chargée
     }
-    if (!CLickSoundBuffer.loadFromFile("Assets/Audio/UI-Click_Sound.wav")) {
-        return -1; // Vérification si l'image a été correctement chargée
-    }
-    if (!musicDeFond.openFromFile("Assets/Audio/572__aarondbaron__ambienceforyou.wav")) {
+    if (!_musicDeFond.openFromFile("Assets/Audio/572__aarondbaron__ambienceforyou.wav")) {
         return -1; // Vérification si l'image a été correctement chargée
     }
 
    
-    Text TextMenu;
-    TextMenu.setFont(MenuFont);
-    TextMenu.setString(L"La font a mario 64 avec é");
-    TextMenu.setCharacterSize(24);
-    TextMenu.setFillColor(Color(0,0,0,200));
-    TextMenu.setStyle(Text::Bold);
+    
 
-    musicDeFond.setLoop(true);
-    musicDeFond.setVolume(30.0f);
-    musicDeFond.play();
-    Sound ClickSound;
-    ClickSound.setBuffer(CLickSoundBuffer);
+    _musicDeFond.setLoop(true);
+    _musicDeFond.setVolume(30.0f);
+    _musicDeFond.play();
+    Sound _ClickSound;
+    _ClickSound.setBuffer(_CLickSoundBuffer);
     // Création d'un sprite pour le fond
-    Sprite backgroundSprite(backgroundTexture);
+    Sprite _backgroundSprite(_backgroundTexture);
+    
+    // Créer une instance de Menu
+    Menu _menu(_window.getSize().x, _window.getSize().y);
     
     // Boucle principale
-    while (window.isOpen())
+    while (_window.isOpen())
     {
         Event event;
-        while (window.pollEvent(event))
+        while (_window.pollEvent(event))
         {
             if (event.type == Event::Closed)
-                window.close();
+                _window.close();
         }
         if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left )
         {
-            ClickSound.play();
+            _ClickSound.play();
+        }
+        if (event.type == sf::Event::KeyPressed) {
+            if (event.key.code == sf::Keyboard::Up) {
+                _menu.moveUp();
+            }
+            if (event.key.code == sf::Keyboard::Down) {
+                _menu.moveDown();
+            }
+            if (event.key.code == sf::Keyboard::Enter) {
+                // Gérer la sélection de l'option
+                int _selected = _menu.getSelectedIndex();
+                switch (_selected) {
+                case 0:
+                    // Logique pour démarrer une nouvelle partie
+                    cout << "Nouvelle Partie sélectionnée" << endl;
+                    // Ici, tu peux ajouter la logique pour démarrer le jeu
+                    break;
+                case 1:
+                    // Logique pour charger une partie
+                    cout << "Charger une Partie sélectionnée" << endl;
+                    // Ici, tu peux ajouter la logique pour charger une partie sauvegardée
+                    break;
+                case 2:
+                    // Logique pour accéder aux options
+                    cout << "Options sélectionnées" << endl;
+                    // Ici, tu peux ajouter la logique pour afficher les options
+                    break;
+                case 3:
+                    // Logique pour quitter le jeu
+                    cout << "Quitter le jeu" <<endl;
+                    _window.close(); // Ferme la fenêtre
+                    break;
+                }
+            }
         }
 
+            }
         // Effacement de la fenêtre avec une couleur (par défaut, noir)
-        window.clear();
-
-        // Dessiner le fond sur la fenêtre
-        window.draw(backgroundSprite);
-        window.draw(TextMenu);
-
+        _window.clear();
+        _window.draw(_backgroundSprite);
+        _menu.draw(_window);
         // Afficher le contenu de la fenêtre
-        window.display();
+        _window.display();
+        
+        return 0;
     }
 
-    return 0;
-}
+    
+
 
