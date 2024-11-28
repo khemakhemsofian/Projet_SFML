@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include "Menu.h"
+#include "GameScene.h"
 
 using namespace sf;
 using namespace std;
@@ -12,6 +13,9 @@ int main() {
     // Création de la fenêtre SFML
     RenderWindow _window(VideoMode(800, 600), "Mario Tzu Party");
     _window.setFramerateLimit(60);
+   // Menu _menu(_window.getSize().x,_window.getSize().y);
+    GameScene* _gameScene;
+    bool _inMenu = true;
 
     // Chargement des ressources
     Texture _backgroundTexture;
@@ -47,48 +51,69 @@ int main() {
     
     Menu _menu(_window.getSize().x, _window.getSize().y);
 
+    _gameScene = new GameScene(_window.getSize().x, _window.getSize().y);
 
     while (_window.isOpen()) {
+
         Event event;
         while (_window.pollEvent(event)) {
             if (event.type == Event::Closed) {
                 _window.close();
             }
+            if (event.type == Event::MouseMoved)
+            {
+                Vector2f _mouseposition = _window.mapPixelToCoords(Vector2i(event.mouseMove.x, event.mouseMove.y));
+                _menu.UpdateEffetSurvol(_mouseposition);
+            }
+            if (_inMenu)
+            {
+                if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
+                    Vector2f _mousePosition = _window.mapPixelToCoords(Vector2i(event.mouseButton.x, event.mouseButton.y));
+                    _menu.selectOption(_mousePosition);
+                    _clickSound.play();
 
-            if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
-                Vector2f _mousePosition = _window.mapPixelToCoords(Vector2i(event.mouseButton.x, event.mouseButton.y));
-                _menu.selectOption(_mousePosition);
-                _clickSound.play();
 
+                    int _selected = _menu.getSelectedIndex();
+                    switch (_selected) {
+                    case 0:
+                        cout << "Nouvelle Partie sélectionnée" << endl;
+                        _inMenu = false;
+                        break;
+                    case 1:
+                        cout << "Charger une Partie sélectionnée." << endl;
 
-                int _selected = _menu.getSelectedIndex();
-                switch (_selected) {
-                case 0:
-                    cout << "Nouvelle Partie sélectionnée" << endl;
-
-                    break;
-                case 1:
-                    cout << "Charger une Partie sélectionnée." << endl;
-
-                    break;
-                case 2:
-                    cout << "Options sélectionnées" << endl;
-                    //faire une fenetre pour les option ,je verrai un changement de scene 
-                    break;
-                case 3:
-                    cout << "Quitter le jeu" << endl;
-                    _window.close();
-                    break;
+                        break;
+                    case 2:
+                        cout << "Options sélectionnées" << endl;
+                        
+                        break;
+                    case 3:
+                        cout << "Quitter le jeu" << endl;
+                        _window.close();
+                        break;
+                    }
                 }
             }
-        }
-
-
-        _window.clear();
-        _window.draw(_backgroundSprite);
-        _menu.draw(_window);
-        _window.display();
+            else
+            {
+                _gameScene->handleEvents(event, _window);
+            }
+         
+        }    
+            _window.clear();
+            if (_inMenu)
+            {
+                _window.draw(_backgroundSprite);
+                _menu.draw(_window);
+            }
+            else
+            {
+                _gameScene->Update(0);  // no deltatime pour l'instant
+                _gameScene->draw(_window);
+            }
+            
+            _window.display();
     }
-
+    delete _gameScene;
     return 0;
 }

@@ -19,8 +19,8 @@ public:
     void moveDown();
     int getSelectedIndex() const;
     void selectOption(Vector2f mousePosition); // Nouvelle méthode pour sélectionner une option avec la souris
-
-private:
+    void UpdateEffetSurvol(Vector2f mousePosition);
+protected:
     vector<Text> _menuOptions;
     int _selectedIndex;
     Font _MenuFont;

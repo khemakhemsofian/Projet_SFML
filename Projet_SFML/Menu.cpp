@@ -30,17 +30,13 @@ void Menu::draw(RenderWindow& _window) {
 
 void Menu::moveUp() {
     if (_selectedIndex - 1 >= 0) {
-        _menuOptions[_selectedIndex].setFillColor(Color(255, 255, 255, 230));
         _selectedIndex--;
-        _menuOptions[_selectedIndex].setFillColor(Color(255, 51, 10, 230));
     }
 }
 
 void Menu::moveDown() {
     if (_selectedIndex + 1 < _menuOptions.size()) {
-        _menuOptions[_selectedIndex].setFillColor(Color(255, 255, 255, 230));
         _selectedIndex++;
-        _menuOptions[_selectedIndex].setFillColor(Color(255, 51, 10, 230));
     }
 }
 
@@ -51,10 +47,28 @@ int Menu::getSelectedIndex() const {
 void Menu::selectOption(Vector2f mousePosition) {
     for (size_t i = 0; i < _menuOptions.size(); i++) {
         if (_menuOptions[i].getGlobalBounds().contains(mousePosition)) {
-            _menuOptions[_selectedIndex].setFillColor(Color(255, 255, 255, 230)); // Réinitialiser la couleur de l'option précédente
+           
             _selectedIndex = i; // Mettre à jour l'index sélectionné
-            _menuOptions[_selectedIndex].setFillColor(Color(255, 51, 10, 230)); // Mettre à jour la couleur de l'option sélectionnée
+           
             break;
         }
+    }
+}
+
+void Menu::UpdateEffetSurvol(Vector2f mousePosition)
+{
+    for (size_t i = 0; i < _menuOptions.size(); i++)
+    {
+        if (_menuOptions[i].getGlobalBounds().contains(mousePosition))
+        {
+            _menuOptions[i].setFillColor(Color(255,51,10,230));
+            _menuOptions[i].setScale(1.2f, 1.2f);
+        }
+        else
+        {
+            _menuOptions[i].setFillColor(Color(0, 0, 0, 230));
+            _menuOptions[i].setScale(1.0f,1.0f);
+        }
+        
     }
 }
