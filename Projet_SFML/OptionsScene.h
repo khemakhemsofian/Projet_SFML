@@ -9,6 +9,10 @@
 using namespace sf;
 using namespace std;
 
+inline float clamp(float value, float minVal, float maxVal) {
+    return (value < minVal) ? minVal : (value > maxVal) ? maxVal : value;
+}
+
 class OptionsScene {
 public:
     OptionsScene(float _width, float _height);

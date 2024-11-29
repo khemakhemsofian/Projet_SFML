@@ -35,14 +35,9 @@ void GameScene::handleEvents(Event& event, RenderWindow& _window) {
     }
 }
 
-
 bool GameScene::checkReturnToMenu(Vector2f mousePosition) {
-    if (_returnToMenu.getGlobalBounds().contains(mousePosition)) {
-        return true; 
-    }
-    return false; 
+    return _returnToMenu.getGlobalBounds().contains(mousePosition);
 }
-
 
 void GameScene::Update(float _deltaTime) {
     // À faire plus tard : ce sera la logique de mise à jour pour les animations ou autre
@@ -50,5 +45,5 @@ void GameScene::Update(float _deltaTime) {
 
 void GameScene::draw(RenderWindow& _window) {
     _window.draw(_player);
-    _window.draw(_returnToMenu); 
+    _window.draw(_returnToMenu);
 }

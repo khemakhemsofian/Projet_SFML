@@ -47,28 +47,21 @@ int Menu::getSelectedIndex() const {
 void Menu::selectOption(Vector2f mousePosition) {
     for (size_t i = 0; i < _menuOptions.size(); i++) {
         if (_menuOptions[i].getGlobalBounds().contains(mousePosition)) {
-           
-            _selectedIndex = i; // Mettre à jour l'index  que tu selection
-           
+            _selectedIndex = i; // Mettre à jour l'index que tu selection
             break;
         }
     }
 }
 
-void Menu::UpdateEffetSurvol(Vector2f mousePosition)
-{
-    for (size_t i = 0; i < _menuOptions.size(); i++)
-    {
-        if (_menuOptions[i].getGlobalBounds().contains(mousePosition))
-        {
-            _menuOptions[i].setFillColor(Color(255,51,10,230));
+void Menu::UpdateEffetSurvol(Vector2f mousePosition) {
+    for (size_t i = 0; i < _menuOptions.size(); i++) {
+        if (_menuOptions[i].getGlobalBounds().contains(mousePosition)) {
+            _menuOptions[i].setFillColor(Color(255, 51, 10, 230));
             _menuOptions[i].setScale(1.2f, 1.2f);
         }
-        else
-        {
+        else {
             _menuOptions[i].setFillColor(Color(0, 0, 0, 230));
-            _menuOptions[i].setScale(1.0f,1.0f);
+            _menuOptions[i].setScale(1.0f, 1.0f);
         }
-        
     }
 }

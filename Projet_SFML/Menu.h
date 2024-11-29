@@ -18,7 +18,7 @@ public:
     void moveUp();
     void moveDown();
     int getSelectedIndex() const;
-    void selectOption(Vector2f mousePosition); 
+    void selectOption(Vector2f mousePosition);
     void UpdateEffetSurvol(Vector2f mousePosition);
 protected:
     vector<Text> _menuOptions;

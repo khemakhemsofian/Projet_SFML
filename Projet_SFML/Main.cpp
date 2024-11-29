@@ -85,6 +85,7 @@ int main() {
             }
             else if (_inOptions) {
                 _optionsScene->handleEvents(event, _window);
+                
                 if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left) {
                     Vector2f _mousePosition = _window.mapPixelToCoords(Vector2i(event.mouseButton.x, event.mouseButton.y));
                     // Vérifier si le bouton de retour est cliqué
@@ -129,4 +130,3 @@ int main() {
     delete _optionsScene; // Libérer la mémoire de la scène des options
     return 0;
 }
-
