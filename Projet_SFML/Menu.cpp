@@ -48,7 +48,7 @@ void Menu::selectOption(Vector2f mousePosition) {
     for (size_t i = 0; i < _menuOptions.size(); i++) {
         if (_menuOptions[i].getGlobalBounds().contains(mousePosition)) {
            
-            _selectedIndex = i; // Mettre à jour l'index sélectionné
+            _selectedIndex = i; // Mettre à jour l'index  que tu selection
            
             break;
         }
